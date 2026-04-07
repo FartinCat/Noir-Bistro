@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Noir Bistro is an immersive luxury restaurant demo concept built to sell premium dining websites."
+    />
+    <title>Noir Bistro | Luxury Dining Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="ambient" aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#home">
+        <span class="brand-mark">NB</span>
+        <span class="brand-copy">
+          <strong>Noir Bistro</strong>
+          <small>Candlelit French dining</small>
+        </span>
+      </a>
+
+      <nav class="nav">
+        <a href="#experience">Experience</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservations">Reservations</a>
+      </nav>
+
+      <a class="button button-ghost" href="#reservations">Book a table</a>
+    </header>
+
+    <main id="home">
+      <section class="hero section reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Luxury restaurant demo concept</p>
+          <h1>Parisian dining, reimagined for the web.</h1>
+          <p class="lede">
+            Noir Bistro is a cinematic concept for restaurants that need a
+            sharper digital presence. It blends luxury mood, clear storytelling,
+            and a reservation flow that feels polished from the first scroll.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="#reservations">Reserve now</a>
+            <a class="button button-ghost" href="#experience">Explore the demo</a>
+          </div>
+
+          <dl class="stats" aria-label="Restaurant highlights">
+            <div>
+              <dt>Capacity</dt>
+              <dd>58 guests</dd>
+            </div>
+            <div>
+              <dt>Style</dt>
+              <dd>Modern French</dd>
+            </div>
+            <div>
+              <dt>Service</dt>
+              <dd>Chef-led tasting</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-visual" aria-label="Atmospheric hero visual">
+          <div class="orb orb-one"></div>
+          <div class="orb orb-two"></div>
+          <div class="orb orb-three"></div>
+
+          <div class="hero-panel">
+            <p>Tonight's signature</p>
+            <h2>Black truffle ravioli</h2>
+            <span>Brown butter, aged parmesan, chive oil</span>
+          </div>
+
+          <div class="floating-card card-top">
+            <span>Open tonight</span>
+            <strong>6:00 PM - 11:30 PM</strong>
+          </div>
+
+          <div class="floating-card card-bottom">
+            <span>Featured pairing</span>
+            <strong>2019 Burgundy Reserve</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section reveal split">
+        <div class="section-intro">
+          <p class="eyebrow">The experience</p>
+          <h2>Designed to feel expensive before the first bite.</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-index">01</span>
+            <h3>Parisian atmosphere</h3>
+            <p>
+              Warm amber lighting, deep shadows, and elegant typography create a
+              memorable first impression.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-index">02</span>
+            <h3>Reservation-first</h3>
+            <p>
+              Prominent calls to action and a simple booking form keep the demo
+              practical for real business use.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-index">03</span>
+            <h3>Client-ready</h3>
+            <p>
+              Built as a sellable concept you can retheme for other premium
+              hospitality clients.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal split">
+        <div class="section-intro">
+          <p class="eyebrow">Why this sells</p>
+          <h2>It works as a client pitch, not just a visual experiment.</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-index">04</span>
+            <h3>High perceived value</h3>
+            <p>
+              The luxury palette and editorial pacing make the brand feel
+              established, expensive, and memorable.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-index">05</span>
+            <h3>Easy to retheme</h3>
+            <p>
+              The structure is simple enough to reuse for another restaurant
+              without rebuilding the whole experience.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-index">06</span>
+            <h3>Business-ready</h3>
+            <p>
+              Reservation and contact paths stay visible, so the demo still
+              behaves like a working hospitality website.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="menu" class="section reveal menu-section">
+        <div class="section-intro">
+          <p class="eyebrow">Signature menu</p>
+          <h2>A concise tasting menu for the demo.</h2>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <span class="course">Amuse-bouche</span>
+            <h3>Crab tartlet</h3>
+            <p>Yuzu cream, dill, cucumber ribbons, crisp rye.</p>
+          </article>
+          <article class="menu-card">
+            <span class="course">Starter</span>
+            <h3>Smoked beet carpaccio</h3>
+            <p>Whipped goat cheese, hazelnut, charred citrus, herbs.</p>
+          </article>
+          <article class="menu-card">
+            <span class="course">Main</span>
+            <h3>Charred sea bass</h3>
+            <p>Leek fondant, champagne veloute, parsley oil, fennel.</p>
+          </article>
+          <article class="menu-card">
+            <span class="course">Dessert</span>
+            <h3>Dark chocolate dome</h3>
+            <p>Salted caramel, vanilla cream, espresso crumble.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="reservations" class="section reveal reservation">
+        <div class="reservation-copy">
+          <p class="eyebrow">Reservations</p>
+          <h2>Ready for a premium client pitch.</h2>
+          <p>
+            This demo helps you show clients how a luxury restaurant website can
+            look and feel. The structure stays elegant, memorable, and easy to
+            adapt for future projects.
+          </p>
+          <p class="reservation-note">
+            Private dining and seasonal menu updates can be swapped in later for
+            a real client version.
+          </p>
+        </div>
+
+        <form class="reservation-form">
+          <label>
+            <span>Name</span>
+            <input type="text" placeholder="Guest name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Date</span>
+            <input type="date" />
+          </label>
+          <label>
+            <span>Guests</span>
+            <select>
+              <option>2 guests</option>
+              <option>4 guests</option>
+              <option>6 guests</option>
+              <option>8+ guests</option>
+            </select>
+          </label>
+          <button class="button" type="button">Request reservation</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Designed as a sales demo for premium restaurant clients.</p>
+      <a href="#home">Back to top</a>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
