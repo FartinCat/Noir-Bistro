@@ -15,14 +15,14 @@ const menuItems: MenuItemProps[] = [
     title: 'Oyster & Snow',
     description: 'Fjord oyster · frozen cucumber mignonette · sea herbs.',
     price: '—',
-    image: '/assets/images/oyster-on-ice.jpg',
+    image: 'https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&q=80&w=800',
   },
   {
     course: 'Chapter I',
     title: 'Arctic Char',
     description: 'Smoked bone broth · sea buckthorn · frozen dill.',
     price: '—',
-    image: '/assets/images/halibut-fish.jpg',
+    image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=800',
     isReverse: true,
   },
   {
@@ -30,14 +30,14 @@ const menuItems: MenuItemProps[] = [
     title: 'Wagyu A5',
     description: 'Seared wagyu · smoked bone marrow · black garlic.',
     price: '—',
-    image: '/assets/images/wagyu-beef.jpg',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800',
   },
   {
     course: 'Epilogue',
     title: 'Cloudberry',
     description: 'Whipped skyr · white chocolate snow · pine.',
     price: '—',
-    image: '/assets/images/chocolate-dessert.jpg',
+    image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22cbc?auto=format&fit=crop&q=80&w=800',
     isReverse: true,
   },
 ];
