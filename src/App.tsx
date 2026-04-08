@@ -29,42 +29,42 @@ const menuItems: MenuItem[] = [
     title: 'Oyster & Snow',
     description: 'Fjord oyster · frozen cucumber mignonette · sea herbs.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&q=80&w=800',
+    image: '/images/oyster-on-ice.jpg',
   },
   {
     course: 'Chapter I',
     title: 'Cured Scallop',
     description: 'Kohlrabi · white currant · elderflower oil.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1626804475297-41609ea0af49?auto=format&fit=crop&q=80&w=800',
+    image: '/images/halibut-fish.jpg',
   },
   {
     course: 'Chapter II',
     title: 'Arctic Char',
     description: 'Smoked bone broth · sea buckthorn · frozen dill.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=800',
+    image: '/images/halibut-fish.jpg',
   },
   {
     course: 'Chapter III',
     title: 'King Crab',
     description: 'Glacial meltwater butter · pine shoots · white asparagus.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&q=80&w=800',
+    image: '/images/wagyu-beef.jpg',
   },
   {
     course: 'Epilogue',
     title: 'Cloudberry',
     description: 'Whipped skyr · white chocolate snow · pine.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22cbc?auto=format&fit=crop&q=80&w=800',
+    image: '/images/chocolate-dessert.jpg',
   },
   {
     course: 'Mignardises',
     title: 'Ice & Stone',
     description: 'Birch syrup caramels · sea salt truffles.',
     price: '—',
-    image: 'https://images.unsplash.com/photo-1514845555126-7874052304ce?auto=format&fit=crop&q=80&w=800',
+    image: '/images/chocolate-dessert.jpg',
   },
 ];
 
@@ -98,6 +98,32 @@ const chefNotes = [
   },
 ];
 
+// ─── SCROLL TO SECTION (works inside Drei ScrollControls) ─────────────────
+// href anchors don't work inside Drei's scroll container — the internal
+// scrollable div doesn't respond to native anchor jumps. We find the element
+// and programmatically scroll the Drei container div instead.
+function scrollToSection(id: string) {
+  // Drei's ScrollControls mounts a real scrollable div as the 2nd child of the canvas wrapper.
+  // Walk up from the target element to find that scrollable container.
+  const target = document.getElementById(id);
+  if (!target) return;
+  // The Drei scroll container is the element with overflow:auto/scroll that wraps the HTML layer
+  let container: HTMLElement | null = target.parentElement;
+  while (container) {
+    const style = window.getComputedStyle(container);
+    if (style.overflow === 'auto' || style.overflow === 'scroll' ||
+        style.overflowY === 'auto' || style.overflowY === 'scroll') {
+      break;
+    }
+    container = container.parentElement;
+  }
+  if (container) {
+    container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+  } else {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 // ─── SCROLL WATCHER (inside Canvas context) ────────────────────────────────
 // Reads Drei ScrollControls offset and pushes header/nudge state up
 const ScrollWatcher: React.FC<{
@@ -123,11 +149,11 @@ const StickyHeader: React.FC<{ scrolled: boolean }> = ({ scrolled }) => {
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="#story">Story</a>
-          <a href="#menu">Menu</a>
-          <a href="#experience">Experience</a>
-          <a href="#private-dining">Private Dining</a>
-          <a href="#reservations" className="nav-cta">Reserve</a>
+          <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); }}>Story</a>
+          <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }}>Menu</a>
+          <a href="#experience" onClick={e => { e.preventDefault(); scrollToSection('experience'); }}>Experience</a>
+          <a href="#private-dining" onClick={e => { e.preventDefault(); scrollToSection('private-dining'); }}>Private Dining</a>
+          <a href="#reservations" className="nav-cta" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reserve</a>
         </nav>
 
         <button
@@ -143,11 +169,11 @@ const StickyHeader: React.FC<{ scrolled: boolean }> = ({ scrolled }) => {
       <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
         <div className="mobile-menu-inner">
           <nav>
-            <a href="#story" onClick={() => setMobileMenuOpen(false)}>Story</a>
-            <a href="#menu" onClick={() => setMobileMenuOpen(false)}>Menu</a>
-            <a href="#experience" onClick={() => setMobileMenuOpen(false)}>Experience</a>
-            <a href="#private-dining" onClick={() => setMobileMenuOpen(false)}>Private Dining</a>
-            <a href="#reservations" onClick={() => setMobileMenuOpen(false)}>Reserve</a>
+            <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); setMobileMenuOpen(false); }}>Story</a>
+            <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); setMobileMenuOpen(false); }}>Menu</a>
+            <a href="#experience" onClick={e => { e.preventDefault(); scrollToSection('experience'); setMobileMenuOpen(false); }}>Experience</a>
+            <a href="#private-dining" onClick={e => { e.preventDefault(); scrollToSection('private-dining'); setMobileMenuOpen(false); }}>Private Dining</a>
+            <a href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); setMobileMenuOpen(false); }}>Reserve</a>
           </nav>
         </div>
       </div>
@@ -255,7 +281,7 @@ export default function App() {
       {/* 3D Scene Layer */}
       <div className={`canvas-container ${sceneLoaded ? 'canvas-container--visible' : ''}`} style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: sceneLoaded ? 1 : 0, transition: 'opacity 2s ease' }}>
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <ScrollControls pages={14} damping={0.1} infinite={false}>
+          <ScrollControls pages={8} damping={0.15} infinite={false}>
               <ScrollWatcher onScroll={handleScrollUpdate} />
               <NordicAurora />
             <Portal />
@@ -279,7 +305,7 @@ export default function App() {
                     <h1>{BRAND.heroHeadline}</h1>
                     <p className="lede">{BRAND.heroLede}</p>
                     <div className="hero-actions">
-                      <a className="button" href="#reservations">Reserve now</a>
+                      <a className="button" href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reserve now</a>
                     </div>
                   </div>
 
@@ -360,9 +386,25 @@ export default function App() {
                 <section className="section reveal gallery-section">
                   <div className="gallery-grid">
                     <article className="gallery-card gallery-tall">
-                      <video autoPlay muted loop playsInline className="hero-video-bg">
-                        <source src="/videos/hero-veo.mp4" type="video/mp4" />
-                      </video>
+                      <img src="/images/atmos-1.png" alt="Nordic atmosphere" className="gallery-img" />
+                      <div className="gallery-content">
+                        <span className="gallery-kicker">The Space</span>
+                        <h3>Pure. Pristine. Profound.</h3>
+                      </div>
+                    </article>
+                    <article className="gallery-card">
+                      <img src="/images/atmos-2.png" alt="Nordic cuisine" className="gallery-img" />
+                      <div className="gallery-content">
+                        <span className="gallery-kicker">The Craft</span>
+                        <h3>Wild Ingredients</h3>
+                      </div>
+                    </article>
+                    <article className="gallery-card">
+                      <img src="/images/atmos-3.png" alt="Nordic detail" className="gallery-img" />
+                      <div className="gallery-content">
+                        <span className="gallery-kicker">The Detail</span>
+                        <h3>Nothing Wasted</h3>
+                      </div>
                     </article>
                   </div>
                 </section>
@@ -403,9 +445,9 @@ export default function App() {
                   <div className="footer-inner">
                     <p>{BRAND.footerLine}</p>
                     <nav className="footer-nav">
-                      <a href="#story">Story</a>
-                      <a href="#menu">Menu</a>
-                      <a href="#reservations">Reservations</a>
+                      <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); }}>Story</a>
+                      <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }}>Menu</a>
+                      <a href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reservations</a>
                     </nav>
                   </div>
                 </footer>
@@ -418,7 +460,7 @@ export default function App() {
       <div className={`reserve-nudge ${nudgeVisible ? 'reserve-nudge--visible' : ''}`}>
         <div className="reserve-nudge-inner">
           <span className="scarcity-text">{BRAND.scarcityText}</span>
-          <a className="button button-sm" href="#reservations">Book now</a>
+          <a className="button button-sm" href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Book now</a>
         </div>
       </div>
     </Layout>
