@@ -1,0 +1,25 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   NORDIC BISTRO — THEME SYSTEM
+   Derived from Veo Flow Moodboard: "Abstract floating embers over a dark, 
+   still lake surface reflecting a cold moon... hint of gold foil."
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Primary Backgrounds */
+  --nb-bg-fjord: #0A0D14; /* Void / Deep lake night */
+  --nb-bg-moonlit: #121B2B; /* Subtle cool reflection */
+  --nb-bg-panel: rgba(18, 22, 34, 0.76); 
+  
+  /* Accents */
+  --nb-accent-gold: #D4AF37; /* The bright core of the ember */
+  --nb-accent-ash: #8E9AAA; /* For muted text and secondary lines */
+  --nb-accent-glow: rgba(212, 175, 55, 0.22); /* Volumetric ember cast */
+  
+  /* Text */
+  --nb-text-primary: #F5F2EB; /* Near white, slightly warm to contrast the cool bg */
+  --nb-text-muted: #B4BFCC; 
+
+  /* Typography */
+  --nb-font-display: 'Cormorant Garamond', serif;
+  --nb-font-body: 'DM Sans', system-ui, sans-serif;
+}
