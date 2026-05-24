@@ -10,10 +10,10 @@
   color-scheme: dark;
 
   /* ── Core palette ── */
-  --bg:             #0a0d14;
-  --bg-mid:         #0e121a;
-  --panel:          rgba(18, 22, 34, 0.76);
-  --panel-strong:   rgba(22, 28, 42, 0.94);
+  --bg:             #050a18;
+  --bg-mid:         #02040a;
+  --panel:          rgba(5, 10, 24, 0.76);
+  --panel-strong:   rgba(8, 14, 32, 0.94);
   --text:           #ede8e0;
   --muted:          #8e9aaa;
   --muted-light:    #b4bfcc;
@@ -46,7 +46,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden; /* Disable native scroll for ScrollControls */
-  background: #000;
+  background: linear-gradient(180deg, var(--nb-bg-fjord, #050a18) 0%, var(--nb-bg-moonlit, #02040a) 100%) !important;
   color: var(--text);
   font-family: 'DM Sans', system-ui, sans-serif;
   font-weight: 300;
@@ -339,12 +339,21 @@ h1, h2, h3,
 .hero {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); /* Video on left, text on right */
   align-items: center;
   gap: 80px;
   padding-top: 100px; /* account for fixed header */
   padding-bottom: 80px;
   position: relative;
+  z-index: 2;
+  overflow: hidden; /* Bound the absolute background image */
+
+  /* Let background stretch edge-to-edge while centering content */
+  width: 100%;
+  max-width: 100vw !important;
+  padding-left: max(40px, calc((100% - var(--max)) / 2 + 40px)) !important;
+  padding-right: max(40px, calc((100% - var(--max)) / 2 + 40px)) !important;
+  margin: 0 auto;
 }
 
 .hero-copy {
@@ -352,6 +361,15 @@ h1, h2, h3,
   gap: 32px;
   position: relative;
   z-index: 2;
+  
+  /* Option 1: Frosted Fjord-Glass Panel */
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(10, 13, 20, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
 }
 
 .hero-copy h1 {
@@ -413,14 +431,13 @@ h1, h2, h3,
 }
 .stats dd { margin: 0; font-size: 0.92rem; font-weight: 500; font-family: 'DM Sans', sans-serif; }
 
-/* ── Hero Visual (the animated panel) ── */
 .hero-visual {
   position: relative;
   min-height: 780px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
-  background: #000;
+  background: rgba(10, 13, 20, 0.88); /* Rich, deep translucent tint that bypasses Chrome clip bug while preserving spatial outlines */
 }
 
 .hero-video-bg {
@@ -429,7 +446,7 @@ h1, h2, h3,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.6; /* Keeps the "moody" dark theme */
+  opacity: 0.75; /* Keeps the "moody" dark theme while showing embers clearly */
   z-index: 1;
 }
 
@@ -455,8 +472,8 @@ h1, h2, h3,
 .spotlight {
   background: radial-gradient(
     circle at var(--pointer-x) var(--pointer-y),
-    rgba(186,220,240,0.18),
-    rgba(201,169,110,0.06) 20%,
+    rgba(186,220,240,0.12),
+    rgba(186,220,240,0.02) 20%,
     transparent 46%
   );
 }
@@ -1153,6 +1170,7 @@ body[data-performance="lite"] .orb { animation: none; opacity: 0.6; }
 
   .section { padding: 64px 20px; }
   .hero { min-height: auto; padding-top: 20px; gap: 32px; }
+  .hero-copy { padding: 24px !important; border-radius: 24px; }
   .hero-copy h1 { font-size: clamp(3rem, 16vw, 5rem); }
   .hero-visual { min-height: 460px; border-radius: 24px; }
   .hero-quote { left: 5%; right: 5%; max-width: none; }
@@ -1393,3 +1411,31 @@ body[data-performance="lite"] .orb { animation: none; opacity: 0.6; }
   .desktop-nav { display: none; }
   .mobile-menu-toggle { display: flex; }
 }
+
+/* ─── RICH FOOTER STYLING ─── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 1080px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+.social-icon:hover {
+  border-color: var(--line-accent) !important;
+  color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+  transform: translateY(-2px);
+}
+

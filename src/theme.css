@@ -6,9 +6,9 @@
 
 :root {
   /* Primary Backgrounds */
-  --nb-bg-fjord: #0A0D14; /* Void / Deep lake night */
-  --nb-bg-moonlit: #121B2B; /* Subtle cool reflection */
-  --nb-bg-panel: rgba(18, 22, 34, 0.76); 
+  --nb-bg-fjord: #050a18; /* Void / Deep lake night */
+  --nb-bg-moonlit: #02040a; /* Subtle cool reflection */
+  --nb-bg-panel: rgba(5, 10, 24, 0.76); 
   
   /* Accents */
   --nb-accent-gold: #D4AF37; /* The bright core of the ember */
