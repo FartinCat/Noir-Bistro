@@ -5,7 +5,19 @@ import { Layout } from './Layout';
 import Portal from './components/canvas/Portal';
 import NordicAurora from './components/canvas/NordicAurora';
 import MenuPreview from './components/ui/MenuPreview';
+import HeroBackground from './components/ui/HeroBackground';
+import HeroContent from './components/ui/HeroContent';
 import { BRAND } from './branding/config';
+
+import oysterImg from './assets/images/oyster-on-ice.jpg';
+import halibutImg from './assets/images/halibut-fish.jpg';
+import wagyuImg from './assets/images/wagyu-beef.jpg';
+import chocolateImg from './assets/images/chocolate-dessert.jpg';
+import atmos1Img from './assets/images/atmos-1.png';
+import atmos2Img from './assets/images/atmos-2.png';
+import atmos3Img from './assets/images/atmos-3.png';
+import heroVeoVideo from './assets/videos/hero-veo.mp4';
+import { Instagram, Facebook, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 // ─── TYPES ──────────────────────────────────────────────────────────────────
 interface TrustSignal {
@@ -29,42 +41,42 @@ const menuItems: MenuItem[] = [
     title: 'Oyster & Snow',
     description: 'Fjord oyster · frozen cucumber mignonette · sea herbs.',
     price: '—',
-    image: '/images/oyster-on-ice.jpg',
+    image: oysterImg,
   },
   {
     course: 'Chapter I',
     title: 'Cured Scallop',
     description: 'Kohlrabi · white currant · elderflower oil.',
     price: '—',
-    image: '/images/halibut-fish.jpg',
+    image: halibutImg,
   },
   {
     course: 'Chapter II',
     title: 'Arctic Char',
     description: 'Smoked bone broth · sea buckthorn · frozen dill.',
     price: '—',
-    image: '/images/halibut-fish.jpg',
+    image: halibutImg,
   },
   {
     course: 'Chapter III',
     title: 'King Crab',
     description: 'Glacial meltwater butter · pine shoots · white asparagus.',
     price: '—',
-    image: '/images/wagyu-beef.jpg',
+    image: wagyuImg,
   },
   {
     course: 'Epilogue',
     title: 'Cloudberry',
     description: 'Whipped skyr · white chocolate snow · pine.',
     price: '—',
-    image: '/images/chocolate-dessert.jpg',
+    image: chocolateImg,
   },
   {
     course: 'Mignardises',
     title: 'Ice & Stone',
     description: 'Birch syrup caramels · sea salt truffles.',
     price: '—',
-    image: '/images/chocolate-dessert.jpg',
+    image: chocolateImg,
   },
 ];
 
@@ -103,11 +115,8 @@ const chefNotes = [
 // scrollable div doesn't respond to native anchor jumps. We find the element
 // and programmatically scroll the Drei container div instead.
 function scrollToSection(id: string) {
-  // Drei's ScrollControls mounts a real scrollable div as the 2nd child of the canvas wrapper.
-  // Walk up from the target element to find that scrollable container.
   const target = document.getElementById(id);
   if (!target) return;
-  // The Drei scroll container is the element with overflow:auto/scroll that wraps the HTML layer
   let container: HTMLElement | null = target.parentElement;
   while (container) {
     const style = window.getComputedStyle(container);
@@ -118,7 +127,13 @@ function scrollToSection(id: string) {
     container = container.parentElement;
   }
   if (container) {
-    container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    let offsetTop = 0;
+    let current: HTMLElement | null = target;
+    while (current && current !== container) {
+      offsetTop += current.offsetTop;
+      current = current.offsetParent as HTMLElement;
+    }
+    container.scrollTo({ top: offsetTop, behavior: 'smooth' });
   } else {
     target.scrollIntoView({ behavior: 'smooth' });
   }
@@ -150,8 +165,8 @@ const StickyHeader: React.FC<{ scrolled: boolean }> = ({ scrolled }) => {
 
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); }}>Story</a>
-          <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }}>Menu</a>
           <a href="#experience" onClick={e => { e.preventDefault(); scrollToSection('experience'); }}>Experience</a>
+          <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }}>Menu</a>
           <a href="#private-dining" onClick={e => { e.preventDefault(); scrollToSection('private-dining'); }}>Private Dining</a>
           <a href="#reservations" className="nav-cta" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reserve</a>
         </nav>
@@ -170,8 +185,8 @@ const StickyHeader: React.FC<{ scrolled: boolean }> = ({ scrolled }) => {
         <div className="mobile-menu-inner">
           <nav>
             <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); setMobileMenuOpen(false); }}>Story</a>
-            <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); setMobileMenuOpen(false); }}>Menu</a>
             <a href="#experience" onClick={e => { e.preventDefault(); scrollToSection('experience'); setMobileMenuOpen(false); }}>Experience</a>
+            <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); setMobileMenuOpen(false); }}>Menu</a>
             <a href="#private-dining" onClick={e => { e.preventDefault(); scrollToSection('private-dining'); setMobileMenuOpen(false); }}>Private Dining</a>
             <a href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); setMobileMenuOpen(false); }}>Reserve</a>
           </nav>
@@ -281,7 +296,7 @@ export default function App() {
       {/* 3D Scene Layer */}
       <div className={`canvas-container ${sceneLoaded ? 'canvas-container--visible' : ''}`} style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: sceneLoaded ? 1 : 0, transition: 'opacity 2s ease' }}>
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <ScrollControls pages={8} damping={0.15} infinite={false}>
+          <ScrollControls pages={11} damping={0.15} infinite={false}>
               <ScrollWatcher onScroll={handleScrollUpdate} />
               <NordicAurora />
             <Portal />
@@ -291,40 +306,9 @@ export default function App() {
               
               <main id="home">
                 {/* ─── HERO SECTION ─── */}
-                <section className="hero section reveal" ref={heroRef}>
-                  <div className="hero-copy">
-                    <dl className="stats" aria-label="Restaurant highlights">
-                      {BRAND.stats.map((s) => (
-                        <div key={s.label}>
-                          <dt>{s.label}</dt>
-                          <dd>{s.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                    <p className="eyebrow">{BRAND.heroEyebrow}</p>
-                    <h1>{BRAND.heroHeadline}</h1>
-                    <p className="lede">{BRAND.heroLede}</p>
-                    <div className="hero-actions">
-                      <a className="button" href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reserve now</a>
-                    </div>
-                  </div>
-
-                  <div className="hero-visual" ref={heroVisualRef}>
-                    <video autoPlay muted loop playsInline className="hero-video-bg">
-                      <source src="/videos/hero-veo.mp4" type="video/mp4" />
-                    </video>
-                    <div className="hero-grid" aria-hidden="true" />
-                    <div className="spotlight" aria-hidden="true" />
-                    <div className="hero-quote">
-                      <p>"A dining room where every course reflects the stark beauty of the North."</p>
-                      <span>Nordic Bistro — Chef's letter</span>
-                    </div>
-                    <div className="hero-panel">
-                      <p>Tonight's signature</p>
-                      <h2>{BRAND.signatureDish}</h2>
-                      <span>{BRAND.signatureDishSub}</span>
-                    </div>
-                  </div>
+                <section className="hero reveal" ref={heroRef}>
+                  <HeroBackground />
+                  <HeroContent heroVisualRef={heroVisualRef} scrollToSection={scrollToSection} />
                 </section>
 
                 {/* ─── TRUST STRIP ─── */}
@@ -386,21 +370,21 @@ export default function App() {
                 <section className="section reveal gallery-section">
                   <div className="gallery-grid">
                     <article className="gallery-card gallery-tall">
-                      <img src="/images/atmos-1.png" alt="Nordic atmosphere" className="gallery-img" />
+                      <img src={atmos1Img} alt="Nordic atmosphere" className="gallery-img" />
                       <div className="gallery-content">
                         <span className="gallery-kicker">The Space</span>
                         <h3>Pure. Pristine. Profound.</h3>
                       </div>
                     </article>
                     <article className="gallery-card">
-                      <img src="/images/atmos-2.png" alt="Nordic cuisine" className="gallery-img" />
+                      <img src={atmos2Img} alt="Nordic cuisine" className="gallery-img" />
                       <div className="gallery-content">
                         <span className="gallery-kicker">The Craft</span>
                         <h3>Wild Ingredients</h3>
                       </div>
                     </article>
                     <article className="gallery-card">
-                      <img src="/images/atmos-3.png" alt="Nordic detail" className="gallery-img" />
+                      <img src={atmos3Img} alt="Nordic detail" className="gallery-img" />
                       <div className="gallery-content">
                         <span className="gallery-kicker">The Detail</span>
                         <h3>Nothing Wasted</h3>
@@ -441,14 +425,80 @@ export default function App() {
                   )}
                 </section>
                 
-                <footer className="footer">
-                  <div className="footer-inner">
-                    <p>{BRAND.footerLine}</p>
-                    <nav className="footer-nav">
-                      <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); }}>Story</a>
-                      <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }}>Menu</a>
-                      <a href="#reservations" onClick={e => { e.preventDefault(); scrollToSection('reservations'); }}>Reservations</a>
-                    </nav>
+                <footer className="footer" style={{ borderTop: '1px solid var(--line)', paddingTop: '80px', paddingBottom: '60px', marginTop: '120px' }}>
+                  <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '40px', maxWidth: 'var(--max)', margin: '0 auto', width: '100%' }}>
+                    
+                    {/* Brand Info */}
+                    <div style={{ display: 'grid', gap: '16px' }}>
+                      <a href="#home" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }} onClick={e => { e.preventDefault(); scrollToSection('home'); }}>
+                        <span className="logo-icon" style={{ color: 'var(--accent)', fontSize: '1.2rem' }}>◈</span>
+                        <span className="logo-text" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', fontWeight: 600, color: 'var(--text)' }}>{BRAND.name}</span>
+                      </a>
+                      <p style={{ color: 'var(--muted-light)', fontSize: '0.86rem', lineHeight: 1.6, margin: 0 }}>
+                        An ultra-premium tasting experience north of Oslo, celebrating the stark beauty, purity, and rhythm of the wild Arctic.
+                      </p>
+                    </div>
+
+                    {/* Seating Hours */}
+                    <div style={{ display: 'grid', gap: '16px' }}>
+                      <h4 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', margin: 0, fontWeight: 500, letterSpacing: '0.04em', color: 'var(--text)' }}>Hours</h4>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px', fontSize: '0.86rem', color: 'var(--muted-light)' }}>
+                        <li style={{ display: 'flex', gap: '8px', alignItems: 'start' }}>
+                          <Clock size={16} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                          <div>
+                            <strong>Wednesday — Sunday</strong>
+                            <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: '4px' }}>Tasting Seating: 7:00 PM & 8:30 PM</div>
+                          </div>
+                        </li>
+                        <li style={{ color: 'var(--muted)' }}>Monday & Tuesday Closed</li>
+                      </ul>
+                    </div>
+
+                    {/* Contact & Concierge */}
+                    <div style={{ display: 'grid', gap: '16px' }}>
+                      <h4 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', margin: 0, fontWeight: 500, letterSpacing: '0.04em', color: 'var(--text)' }}>Concierge</h4>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '12px', fontSize: '0.86rem', color: 'var(--muted-light)' }}>
+                        <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <MapPin size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+                          <span>Fjordveien 104, 9008 Tromsø</span>
+                        </li>
+                        <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <Phone size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+                          <span>+47 77 60 00 00</span>
+                        </li>
+                        <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <Mail size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+                          <span>concierge@noirbistro.no</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Social Media */}
+                    <div style={{ display: 'grid', gap: '16px' }}>
+                      <h4 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', margin: 0, fontWeight: 500, letterSpacing: '0.04em', color: 'var(--text)' }}>Experience</h4>
+                      <p style={{ color: 'var(--muted-light)', fontSize: '0.86rem', lineHeight: 1.6, margin: 0 }}>
+                        Follow our seasonal journeys and foraged chronicles.
+                      </p>
+                      <div style={{ display: 'flex', gap: '12px' }}>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid var(--line)', display: 'grid', placeItems: 'center', color: 'var(--muted-light)', transition: 'all 0.2s ease', background: 'rgba(255,255,255,0.02)' }} className="social-icon">
+                          <Instagram size={18} />
+                        </a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid var(--line)', display: 'grid', placeItems: 'center', color: 'var(--muted-light)', transition: 'all 0.2s ease', background: 'rgba(255,255,255,0.02)' }} className="social-icon">
+                          <Facebook size={18} />
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                  
+                  {/* Copyright strip */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: 'var(--max)', margin: '40px auto 0', width: '100%', borderTop: '1px solid var(--line)', paddingTop: '24px', fontSize: '0.78rem', color: 'var(--muted)' }}>
+                    <p style={{ margin: 0 }}>{BRAND.footerLine}</p>
+                    <div style={{ display: 'flex', gap: '20px' }}>
+                      <a href="#story" onClick={e => { e.preventDefault(); scrollToSection('story'); }} style={{ color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s ease' }}>Story</a>
+                      <a href="#experience" onClick={e => { e.preventDefault(); scrollToSection('experience'); }} style={{ color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s ease' }}>Experience</a>
+                      <a href="#menu" onClick={e => { e.preventDefault(); scrollToSection('menu'); }} style={{ color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s ease' }}>Menu</a>
+                    </div>
                   </div>
                 </footer>
               </main>

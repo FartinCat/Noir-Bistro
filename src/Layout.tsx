@@ -26,6 +26,7 @@ export const Header: React.FC = () => {
         
         <nav className="nav" aria-label="Main navigation">
           <a href="#story">Our Story</a>
+          <a href="#experience">Experience</a>
           <a href="#menu">Menu</a>
           <a href="#reservations">Reservations</a>
         </nav>

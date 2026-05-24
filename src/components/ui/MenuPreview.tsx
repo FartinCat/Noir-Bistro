@@ -1,4 +1,8 @@
 import React from 'react';
+import oysterImg from '../../assets/images/oyster-on-ice.jpg';
+import halibutImg from '../../assets/images/halibut-fish.jpg';
+import wagyuImg from '../../assets/images/wagyu-beef.jpg';
+import chocolateImg from '../../assets/images/chocolate-dessert.jpg';
 
 interface MenuItemProps {
   course: string;
@@ -15,14 +19,14 @@ const menuItems: MenuItemProps[] = [
     title: 'Oyster & Snow',
     description: 'Fjord oyster · frozen cucumber mignonette · sea herbs.',
     price: '—',
-    image: '/images/oyster-on-ice.jpg',
+    image: oysterImg,
   },
   {
     course: 'Chapter I',
     title: 'Arctic Char',
     description: 'Smoked bone broth · sea buckthorn · frozen dill.',
     price: '—',
-    image: '/images/halibut-fish.jpg',
+    image: halibutImg,
     isReverse: true,
   },
   {
@@ -30,14 +34,14 @@ const menuItems: MenuItemProps[] = [
     title: 'Wagyu A5',
     description: 'Seared wagyu · smoked bone marrow · black garlic.',
     price: '—',
-    image: '/images/wagyu-beef.jpg',
+    image: wagyuImg,
   },
   {
     course: 'Epilogue',
     title: 'Cloudberry',
     description: 'Whipped skyr · white chocolate snow · pine.',
     price: '—',
-    image: '/images/chocolate-dessert.jpg',
+    image: chocolateImg,
     isReverse: true,
   },
 ];
