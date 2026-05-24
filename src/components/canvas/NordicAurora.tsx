@@ -13,10 +13,10 @@ const NordicAurora: React.FC = () => {
     uTime: { value: 0 },
     uScroll: { value: 0 },
     uIsMobile: { value: isMobile ? 1.0 : 0.0 },
-    uColor1: { value: new THREE.Color('#0A1128') }, // Deep Midnight Blue
-    uColor2: { value: new THREE.Color('#1C3B4E') }, // Arctic Teal
-    uColor3: { value: new THREE.Color('#8B5A2B') }, // Smoked Amber
-    uColor4: { value: new THREE.Color('#E5D3B3') }, // Pale Gold
+    uColor1: { value: new THREE.Color('#050a18') }, // Deep Midnight Blue
+    uColor2: { value: new THREE.Color('#0b1528') }, // Darker Teal-Blue
+    uColor3: { value: new THREE.Color('#02040a') }, // Blackish Blue
+    uColor4: { value: new THREE.Color('#050a18') }, // Deep Midnight Blue
   }), [isMobile]);
 
   useFrame((state) => {
@@ -108,7 +108,7 @@ const NordicAurora: React.FC = () => {
       
       color *= 0.85;
       
-      gl_FragColor = vec4(color, 1.0);
+      gl_FragColor = vec4(color, 0.4);
     }
   `;
 
@@ -119,6 +119,7 @@ const NordicAurora: React.FC = () => {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
+        transparent={true}
         depthWrite={false}
         depthTest={false}
       />

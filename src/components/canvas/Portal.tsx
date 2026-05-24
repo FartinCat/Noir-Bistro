@@ -154,13 +154,13 @@ const Portal: React.FC = () => {
       // COLOR PALETTE (Nordic Bistro)
       // ----------------------------------------
       // Deep Midnight Blue
-      vec3 colorDeep = vec3(0.039, 0.067, 0.110); // #0A1128
+      vec3 colorDeep = vec3(0.02, 0.04, 0.09);
       // Arctic Teal
-      vec3 colorTeal = vec3(0.110, 0.231, 0.306); // #1C3B4E
-      // Smoked Amber
-      vec3 colorAmber = vec3(0.545, 0.353, 0.169); // #8B5A2B
-      // Pale Gold
-      vec3 colorGold = vec3(0.898, 0.827, 0.702);  // #E5D3B3
+      vec3 colorTeal = vec3(0.04, 0.08, 0.16);
+      // Smoked Amber (Disabled - Dark Blue)
+      vec3 colorAmber = vec3(0.01, 0.02, 0.05);
+      // Pale Gold (Disabled - Dark Blue)
+      vec3 colorGold = vec3(0.02, 0.04, 0.09);
       
       // Base background: mix deep blue and teal based on vertical position
       vec3 bg = mix(colorDeep, colorTeal, grad * 0.7);
@@ -169,9 +169,8 @@ const Portal: React.FC = () => {
       vec3 auroraColor = mix(colorTeal, colorGold, aurora * 0.8);
       vec3 color = mix(bg, auroraColor, aurora * 0.6);
       
-      // Apply scroll-driven warming: Amber and Gold emerge as user scrolls
-      // The warm colors are more intense at the bottom of the screen
-      float warmth = u_scroll * warmMask * 0.7;
+      // Apply scroll-driven warming: Disabled
+      float warmth = 0.0;
       color = mix(color, colorAmber, warmth * 0.5);
       color = mix(color, colorGold, warmth * 0.8);
       
@@ -186,7 +185,7 @@ const Portal: React.FC = () => {
       float vignette = 1.0 - length(vUv - 0.5) * 0.5;
       color *= vignette;
       
-      gl_FragColor = vec4(color, 1.0);
+      gl_FragColor = vec4(color, 0.3);
     }
   `;
 
@@ -197,7 +196,7 @@ const Portal: React.FC = () => {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
-        transparent={false}
+        transparent={true}
         depthWrite={false}
         depthTest={false}
       />
