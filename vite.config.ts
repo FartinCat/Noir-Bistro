@@ -7,9 +7,7 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
     plugins: [react(), tailwindcss()],
-    // Serve the root-level `assets/` folder as static files
-    // so /assets/images/... and /assets/videos/... resolve correctly.
-    publicDir: path.resolve(__dirname, 'assets'),
+
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
@@ -22,6 +20,20 @@ export default defineConfig(({mode}) => {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              // Group three.js and react-three packages into a separate chunk
+              if (id.includes('three') || id.includes('@react-three')) {
+                return 'three-r3f';
+              }
+            }
+          },
+        },
+      },
     },
   };
 });
