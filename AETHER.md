@@ -1,9 +1,9 @@
-# Aether Agent v0.1.1 — Noir Bistro
+# Aether Agent v0.1.2 — Noir Bistro
 
 ## 14. Project Metadata
 
 **Project Name**: Noir Bistro
-**Version**: 0.1.1
+**Version**: 0.1.2
 **Author**: FartinCat
 **Created**: 2026-05-24
 **Status**: In Development
@@ -28,6 +28,14 @@ An ultra-premium, immersive React single-page application for an avant-garde Nor
 - [ ] AI Concierge interface (integrated with Gemini API)
 
 ## 16. Changelog
+
+### [0.1.2] - 2026-05-24
+- Modified 1 other
+
+### [1.0.0] - 2026-05-25
+- Executed /15-release God Mode workflow.
+- Generated premium commercial LICENSE.md and README.md.
+- Packaged v1.0.0 release.
 
 ### [0.1.1] - 2026-05-24
 - Modified 16 other
