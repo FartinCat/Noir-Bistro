@@ -13,3 +13,6 @@ docs/
 .codex/
 scripts/
 .mcp.json
+.playwright-mcp/
+archived/
+
