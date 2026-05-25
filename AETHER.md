@@ -1,9 +1,9 @@
-# Aether Agent v0.1.2 — Noir Bistro
+# Aether Agent v0.1.3 — Nordic Bistro
 
 ## 14. Project Metadata
 
-**Project Name**: Noir Bistro
-**Version**: 0.1.2
+**Project Name**: Nordic Bistro
+**Version**: 0.1.3
 **Author**: FartinCat
 **Created**: 2026-05-24
 **Status**: In Development
@@ -49,13 +49,13 @@ An ultra-premium, immersive React single-page application for an avant-garde Nor
 
 ## 18. Session Context
 
-# Session Context — noir-bistro
+# Session Context — Nordic-Bistro
 Initialized: 2026-05-24
-Project Directory: d:\Claude\noir-bistro
+Project Directory: d:\Claude\Nordic Bistro
 
 ### [2026-05-24 17:05] — session-start
 **Agent**: Antigravity
-**Action**: Session initialized and performed scanner workflow (/01-scan) for noir-bistro.
+**Action**: Session initialized and performed scanner workflow (/01-scan) for Nordic-Bistro.
 **State Change**: Reinitialized Section 18 Session Context with the correct workspace path and appended first entry.
 **Next Step**: Complete the scan report and save it to docs/scan-reports/SCAN_REPORT_01.md.
 
