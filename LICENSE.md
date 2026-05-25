@@ -1,6 +1,6 @@
-# NOIR BISTRO COMMERCIAL LICENSE
+# NORDIC BISTRO COMMERCIAL LICENSE
 
-Applies to Software Version: v0.1.2
+Applies to Software Version: v0.1.3
 
 **Version 1.0.0**  
 **Effective Date:** 2026-05-25  

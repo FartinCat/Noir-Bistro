@@ -1,11 +1,11 @@
-# 🌑 Noir Bistro
+# 🌑 Nordic Bistro
 > *An ultra-premium, immersive WebGL tasting room experience.*
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-Commercial-red.svg)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-**Noir Bistro** is a cutting-edge Single Page Application (SPA) designed for avant-garde, Michelin-tier culinary experiences. It merges React, Three.js, and cinematic generative AI assets to create a deep, scrolling narrative environment that feels alive.
+**Nordic Bistro** is a cutting-edge Single Page Application (SPA) designed for avant-garde, Michelin-tier culinary experiences. It merges React, Three.js, and cinematic generative AI assets to create a deep, scrolling narrative environment that feels alive.
 
 ---
 
