@@ -468,7 +468,7 @@ export default function App() {
                         </li>
                         <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                           <Mail size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                          <span>concierge@noirbistro.no</span>
+                          <span>concierge@nordicbistro.no</span>
                         </li>
                       </ul>
                     </div>
